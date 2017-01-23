@@ -66,7 +66,7 @@ class CorrespondingReferenceForm extends EntityForm {
       '#title' => $this->t('Label'),
       '#maxlength' => 255,
       '#default_value' => $correspondingReference->label(),
-      '#description' => $this->t("Label for the Example."),
+      '#description' => $this->t("Label for the corresponding reference."),
       '#required' => TRUE,
     ];
 

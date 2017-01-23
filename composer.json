@@ -1,0 +1,8 @@
+{
+  "name": "drupal/corresponding_reference",
+  "type": "drupal-module",
+  "description": "Corresponding Reference",
+  "homepage": "https://github.com/TopFloorTech/drupal-corresponding_reference",
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev"
+}

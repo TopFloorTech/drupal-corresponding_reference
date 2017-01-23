@@ -1,0 +1,5 @@
+services:
+  corresponding_reference.corresponding_reference_subscriber:
+    class: Drupal\corresponding_reference\EventSubscriber\CorrespondingReferenceSubscriber
+    tags:
+      - { name: event_subscriber }

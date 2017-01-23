@@ -1,0 +1,3 @@
+administer corresponding_reference:
+  title: 'Administer corresponding reference'
+  description: 'Allows user to create two-way references between entities.'

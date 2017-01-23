@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * Implements hook_entity_insert().
+ */
+function corresponding_reference_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+  corresponding_reference_sync_corresponding_references($entity);
+}
+
+/**
+ * Implements hook_entity_update().
+ */
+function corresponding_reference_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+  corresponding_reference_sync_corresponding_references($entity);
+}
+
+/**
+ * @param \Drupal\Core\Entity\EntityInterface $entity
+ */
+function corresponding_reference_sync_corresponding_references(\Drupal\Core\Entity\EntityInterface $entity) {
+  if (!$entity instanceof \Drupal\Core\Entity\FieldableEntityInterface) {
+    return;
+  }
+
+  /** @var \Drupal\corresponding_reference\CorrespondingReferenceStorageInterface $storage */
+  $storage = \Drupal::entityTypeManager()->getStorage('corresponding_reference');
+
+  $references = $storage->loadValid($entity);
+
+  foreach ($references as $reference) {
+    $reference->synchronizeCorrespondingFields($entity);
+  }
+
+
+}

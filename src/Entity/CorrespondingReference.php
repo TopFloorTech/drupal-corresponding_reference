@@ -340,12 +340,6 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
     }
 
     if ($set) {
-      drupal_set_message(sprintf(
-        '%s corresponding record(s) on entity %s',
-        ($operation == CorrespondingReferenceOperations::REMOVE ? 'Removed' : 'Added'),
-        $correspondingEntity->label()
-      ));
-
       $field->setValue($values);
       $correspondingEntity->save();
     }

@@ -7,7 +7,7 @@ use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;
 
 /**
- * Defines the interface for tax services.
+ * Defines the interface for corresponding reference config entities.
  */
 interface CorrespondingReferenceInterface extends ConfigEntityInterface {
 

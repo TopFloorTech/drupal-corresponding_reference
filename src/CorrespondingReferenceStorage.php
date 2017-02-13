@@ -6,7 +6,7 @@ use Drupal\Core\Config\Entity\ConfigEntityStorage;
 use Drupal\Core\Entity\EntityInterface;
 
 /**
- * Defines the tax service storage.
+ * Defines the Corresponding Reference storage.
  */
 class CorrespondingReferenceStorage extends ConfigEntityStorage implements CorrespondingReferenceStorageInterface {
 

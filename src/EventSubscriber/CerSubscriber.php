@@ -4,6 +4,9 @@ namespace Drupal\cer\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
+/**
+ * The Event Subscriber for Corresponding References.
+ */
 class CerSubscriber implements EventSubscriberInterface {
 
   /**

@@ -6,6 +6,9 @@ use Drupal\Core\Entity\EntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
+/**
+ * Form handler for corresponding reference delete form.
+ */
 class CorrespondingReferenceDeleteForm extends EntityConfirmFormBase {
 
   /**

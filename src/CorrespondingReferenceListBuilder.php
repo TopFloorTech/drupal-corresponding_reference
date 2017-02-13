@@ -6,6 +6,9 @@ use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\cer\Entity\CorrespondingReferenceInterface;
 
+/**
+ * The list builder for Corresponding Reference entities.
+ */
 class CorrespondingReferenceListBuilder extends ConfigEntityListBuilder {
   public function buildHeader() {
     $header = [

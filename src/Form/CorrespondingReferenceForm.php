@@ -116,12 +116,57 @@ class CorrespondingReferenceForm extends EntityForm {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function save(array $form, FormStateInterface $form_state) {
+    /** @var CorrespondingReferenceInterface $correspondingReference */
+    $correspondingReference = $this->entity;
+
+    $status = $correspondingReference->save();
+
+    if ($status) {
+      drupal_set_message($this->t('Saved the %label corresponding reference.', [
+        '%label' => $correspondingReference->label(),
+      ]));
+    }
+    else {
+      drupal_set_message($this->t('The %label corresponding reference was not saved.', [
+        '%label' => $correspondingReference->label(),
+      ]));
+    }
+
+    $form_state->setRedirect('entity.corresponding_reference.collection');
+  }
+
+  /**
+   * Helper function to check whether a corresponding reference configuration entity exists.
+   */
+  public function exists($id) {
+    $entity = $this->entityQuery->get('corresponding_reference')
+      ->condition('id', $id)
+      ->execute();
+    return (bool) $entity;
+  }
+
+  /**
+   * Gets a map of possible reference fields.
+   *
+   * @return array
+   *   The reference field map.
+   */
   protected function getReferenceFieldMap() {
     $map = $this->fieldManager->getFieldMapByFieldType('entity_reference');
 
     return $map;
   }
 
+  /**
+   * Gets an array of field options to populate in the form.
+   *
+   * @return array
+   *   An array of field options.
+   */
   protected function getFieldOptions() {
     $options = [];
 
@@ -138,6 +183,12 @@ class CorrespondingReferenceForm extends EntityForm {
     return $options;
   }
 
+  /**
+   * Gets an array of bundle options to populate in the form.
+   *
+   * @return array
+   *   An array of bundle options.
+   */
   protected function getBundleOptions() {
     /** @var CorrespondingReferenceInterface $correspondingReference */
     $correspondingReference = $this->entity;
@@ -176,28 +227,14 @@ class CorrespondingReferenceForm extends EntityForm {
   }
 
   /**
-   * {@inheritdoc}
+   * Gets bundle options value in a format for use in the form.
+   *
+   * @param array|NULL $values
+   *   The values to convert.
+   *
+   * @return array
+   *   The converted values.
    */
-  public function save(array $form, FormStateInterface $form_state) {
-    /** @var CorrespondingReferenceInterface $correspondingReference */
-    $correspondingReference = $this->entity;
-
-    $status = $correspondingReference->save();
-
-    if ($status) {
-      drupal_set_message($this->t('Saved the %label corresponding reference.', [
-        '%label' => $correspondingReference->label(),
-      ]));
-    }
-    else {
-      drupal_set_message($this->t('The %label corresponding reference was not saved.', [
-        '%label' => $correspondingReference->label(),
-      ]));
-    }
-
-    $form_state->setRedirect('entity.corresponding_reference.collection');
-  }
-
   protected function getBundleValuesForForm(array $values = NULL) {
     $formValues = [];
 
@@ -212,6 +249,15 @@ class CorrespondingReferenceForm extends EntityForm {
     return $formValues;
   }
 
+  /**
+   * Gets bundle options value in a format for use in the config entity.
+   *
+   * @param array|NULL $values
+   *   The values to convert.
+   *
+   * @return array
+   *   The converted values.
+   */
   protected function getBundleValuesForEntity(array $values = NULL) {
     $entityValues = [];
 
@@ -226,6 +272,16 @@ class CorrespondingReferenceForm extends EntityForm {
     return $entityValues;
   }
 
+  /**
+   * Copies form values into the config entity.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   The config entity.
+   * @param array $form
+   *   The form.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The form state object.
+   */
   protected function copyFormValuesToEntity(EntityInterface $entity, array $form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
 
@@ -241,15 +297,5 @@ class CorrespondingReferenceForm extends EntityForm {
     $entity->set('second_field', $values['second_field']);
     $entity->set('bundles', $this->getBundleValuesForEntity($values['bundles']));
     $entity->set('enabled', $values['enabled']);
-  }
-
-  /**
-   * Helper function to check whether a corresponding reference configuration entity exists.
-   */
-  public function exists($id) {
-    $entity = $this->entityQuery->get('corresponding_reference')
-      ->condition('id', $id)
-      ->execute();
-    return (bool) $entity;
   }
 }

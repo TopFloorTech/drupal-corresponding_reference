@@ -1,5 +1,0 @@
-name: Corresponding Reference
-description: Syncs the reference fields between entities which refererence one another.
-core: 8.x
-package: Fields
-type: module

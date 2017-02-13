@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\corresponding_reference;
+namespace Drupal\cer;
 
 use Drupal\Core\Config\Entity\ConfigEntityListBuilder;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\corresponding_reference\Entity\CorrespondingReferenceInterface;
+use Drupal\cer\Entity\CorrespondingReferenceInterface;
 
 class CorrespondingReferenceListBuilder extends ConfigEntityListBuilder {
   public function buildHeader() {

@@ -1,7 +1,6 @@
 <?php
 
-namespace Drupal\corresponding_reference\Entity;
-
+namespace Drupal\cer\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityInterface;
 use Drupal\Core\Entity\FieldableEntityInterface;

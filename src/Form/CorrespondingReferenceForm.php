@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\corresponding_reference\Form;
+namespace Drupal\cer\Form;
 
 use Drupal\Core\Entity\EntityFieldManager;
 use Drupal\Core\Entity\EntityForm;
@@ -8,7 +8,7 @@ use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Entity\Query\QueryFactory;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\corresponding_reference\Entity\CorrespondingReferenceInterface;
+use Drupal\cer\Entity\CorrespondingReferenceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**

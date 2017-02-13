@@ -1,11 +1,11 @@
 <?php
 
-namespace Drupal\corresponding_reference\Entity;
+namespace Drupal\cer\Entity;
 
 use Drupal\Core\Config\Entity\ConfigEntityBase;
 use Drupal\Core\Entity\FieldableEntityInterface;
 use Drupal\Core\Field\FieldItemInterface;
-use Drupal\corresponding_reference\CorrespondingReferenceOperations;
+use Drupal\cer\CorrespondingReferenceOperations;
 
 /**
  * Defines a corresponding reference entity.
@@ -14,26 +14,26 @@ use Drupal\corresponding_reference\CorrespondingReferenceOperations;
  *   id = "corresponding_reference",
  *   label = @Translation("Corresponding reference"),
  *   handlers = {
- *     "list_builder" = "Drupal\corresponding_reference\CorrespondingReferenceListBuilder",
- *     "storage" = "Drupal\corresponding_reference\CorrespondingReferenceStorage",
+ *     "list_builder" = "Drupal\cer\CorrespondingReferenceListBuilder",
+ *     "storage" = "Drupal\cer\CorrespondingReferenceStorage",
  *     "form" = {
- *       "add" = "Drupal\corresponding_reference\Form\CorrespondingReferenceForm",
- *       "edit" = "Drupal\corresponding_reference\Form\CorrespondingReferenceForm",
- *       "delete" = "Drupal\corresponding_reference\Form\CorrespondingReferenceDeleteForm",
- *       "sync" = "Drupal\corresponding_reference\Form\CorrespondingReferenceSyncForm",
+ *       "add" = "Drupal\cer\Form\CorrespondingReferenceForm",
+ *       "edit" = "Drupal\cer\Form\CorrespondingReferenceForm",
+ *       "delete" = "Drupal\cer\Form\CorrespondingReferenceDeleteForm",
+ *       "sync" = "Drupal\cer\Form\CorrespondingReferenceSyncForm",
  *     }
  *   },
  *   config_prefix = "corresponding_reference",
- *   admin_permission = "administer corresponding_reference",
+ *   admin_permission = "administer cer",
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "label"
  *   },
  *   links = {
- *     "collection" = "/admin/config/content/corresponding_reference",
- *     "edit-form" = "/admin/config/content/corresponding_reference/{corresponding_reference}",
- *     "delete-form" = "/admin/config/content/corresponding_reference/{corresponding_reference}/delete",
- *     "sync-form" = "/admin/config/content/corresponding_reference/{corresponding_reference}/sync"
+ *     "collection" = "/admin/config/content/cer",
+ *     "edit-form" = "/admin/config/content/cer/{corresponding_reference}",
+ *     "delete-form" = "/admin/config/content/cer/{corresponding_reference}/delete",
+ *     "sync-form" = "/admin/config/content/cer/{corresponding_reference}/sync"
  *   }
  * )
  */
@@ -276,13 +276,7 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
   }
 
   /**
-   * Gets the name of the corresponding field of the provided field.
-   *
-   * @param $fieldName string
-   *   The provided field name.
-   *
-   * @return string
-   *   The corresponding field name.
+   * {@inheritdoc}
    */
   public function getCorrespondingField($fieldName) {
     $fields = $this->getCorrespondingFields();
@@ -350,8 +344,8 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
    *
    * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
    *   The current entity.
-   *
-   * @param $fieldName
+   * @param string $fieldName
+   *   The field name to check.
    *
    * @return array
    *   The differences keyed by 'added' and 'removed'.
@@ -397,6 +391,19 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
     return $differences;
   }
 
+  /**
+   * Checks if the given entity has the provided corresponding value.
+   *
+   * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
+   *   The entity to check.
+   * @param string $fieldName
+   *   The field name on the entity to check.
+   * @param mixed $id
+   *   The corresponding ID to check.
+   *
+   * @return bool
+   *   TRUE if value already exists, FALSE otherwise.
+   */
   protected function entityHasValue(FieldableEntityInterface $entity, $fieldName, $id) {
     if (!$entity->hasField($fieldName)) {
       return FALSE;

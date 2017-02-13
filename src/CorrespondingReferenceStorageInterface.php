@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\corresponding_reference;
+namespace Drupal\cer;
 
 use Drupal\Core\Config\Entity\ConfigEntityStorageInterface;
 use Drupal\Core\Entity\EntityInterface;
@@ -16,7 +16,7 @@ interface CorrespondingReferenceStorageInterface extends ConfigEntityStorageInte
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   The entity.
    *
-   * @return \Drupal\corresponding_reference\Entity\CorrespondingReferenceInterface[]
+   * @return \Drupal\cer\Entity\CorrespondingReferenceInterface[]
    *   The valid corresponding references.
    */
   public function loadValid(EntityInterface $entity);

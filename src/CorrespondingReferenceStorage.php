@@ -1,6 +1,7 @@
 <?php
 
-namespace Drupal\corresponding_reference;
+namespace Drupal\cer;
+
 use Drupal\Core\Config\Entity\ConfigEntityStorage;
 use Drupal\Core\Entity\EntityInterface;
 

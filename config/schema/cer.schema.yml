@@ -1,4 +1,4 @@
-corresponding_reference.corresponding_reference.*:
+cer.corresponding_reference.*:
   type: config_entity
   label: 'Corresponding reference config'
   mapping:

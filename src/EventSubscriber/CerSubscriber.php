@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\corresponding_reference\EventSubscriber;
+namespace Drupal\cer\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class CorrespondingReferenceSubscriber implements EventSubscriberInterface {
+class CerSubscriber implements EventSubscriberInterface {
 
   /**
    * {@inheritdoc}

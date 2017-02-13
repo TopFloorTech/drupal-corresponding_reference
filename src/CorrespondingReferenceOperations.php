@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\corresponding_reference;
+namespace Drupal\cer;
 
 final class CorrespondingReferenceOperations {
   const ADD = 'add';

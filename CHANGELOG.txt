@@ -1,0 +1,3 @@
+Corresponding Entity References 8.x-4.x-dev, 2017-02-12
+-------------------------------------------------------
+#2457583 by bmcclure: CER Drupal 8 port (Initial release)

@@ -1,16 +1,24 @@
 <?php
 
 /**
+ * @file
+ * CER keeps reference fields in sync.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+
+/**
  * Implements hook_entity_insert().
  */
-function cer_entity_insert(Drupal\Core\Entity\EntityInterface $entity) {
+function cer_entity_insert(EntityInterface $entity) {
   cer_sync_corresponding_references($entity);
 }
 
 /**
  * Implements hook_entity_update().
  */
-function cer_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
+function cer_entity_update(EntityInterface $entity) {
   cer_sync_corresponding_references($entity);
 }
 
@@ -20,8 +28,8 @@ function cer_entity_update(Drupal\Core\Entity\EntityInterface $entity) {
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity to synchronize corresponding references for.
  */
-function cer_sync_corresponding_references(\Drupal\Core\Entity\EntityInterface $entity) {
-  if (!$entity instanceof \Drupal\Core\Entity\FieldableEntityInterface) {
+function cer_sync_corresponding_references(EntityInterface $entity) {
+  if (!$entity instanceof FieldableEntityInterface) {
     return;
   }
 

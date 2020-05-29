@@ -27,6 +27,9 @@ function cer_entity_update(EntityInterface $entity) {
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity to synchronize corresponding references for.
+ *
+ * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
+ * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
 function cer_sync_corresponding_references(EntityInterface $entity) {
   if (!$entity instanceof FieldableEntityInterface) {

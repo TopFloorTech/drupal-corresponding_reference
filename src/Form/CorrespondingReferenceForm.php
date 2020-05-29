@@ -126,12 +126,12 @@ class CorrespondingReferenceForm extends EntityForm {
     $status = $correspondingReference->save();
 
     if ($status) {
-      drupal_set_message($this->t('Saved the %label corresponding reference.', [
+      $this->messenger()->addStatus($this->t('Saved the %label corresponding reference.', [
         '%label' => $correspondingReference->label(),
       ]));
     }
     else {
-      drupal_set_message($this->t('The %label corresponding reference was not saved.', [
+      $this->messenger()->addStatus($this->t('The %label corresponding reference was not saved.', [
         '%label' => $correspondingReference->label(),
       ]));
     }

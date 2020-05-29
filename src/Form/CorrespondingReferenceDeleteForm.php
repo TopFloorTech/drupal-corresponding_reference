@@ -40,7 +40,7 @@ class CorrespondingReferenceDeleteForm extends EntityConfirmFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->entity->delete();
 
-    drupal_set_message($this->t('Corresponding reference %label has been deleted.', [
+    $this->messenger()->addStatus($this->t('Corresponding reference %label has been deleted.', [
       '%label' => $this->entity->label()
     ]));
 

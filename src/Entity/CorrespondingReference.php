@@ -243,6 +243,9 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
       $differences = $this->calculateDifferences($entity, $fieldName, $deleted);
       $correspondingField = $this->getCorrespondingField($fieldName);
 
+      // Let other modules alter differences.
+      \Drupal::moduleHandler()->alter('cer_differences', $entity, $differences, $correspondingField);
+
       foreach ($differences as $operation => $entities) {
         /** @var FieldableEntityInterface $correspondingEntity */
         foreach ($entities as $correspondingEntity) {

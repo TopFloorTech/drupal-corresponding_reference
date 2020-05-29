@@ -164,8 +164,10 @@ interface CorrespondingReferenceInterface extends ConfigEntityInterface {
    *
    * @param \Drupal\Core\Entity\FieldableEntityInterface $entity
    *   The entity.
+   * @param bool $deleted
+   *   Whether the entity is deleted.
    */
-  public function synchronizeCorrespondingFields(FieldableEntityInterface $entity);
+  public function synchronizeCorrespondingFields(FieldableEntityInterface $entity, $deleted);
 
   /**
    * Synchronizes a single corresponding field on a corresponding entity.

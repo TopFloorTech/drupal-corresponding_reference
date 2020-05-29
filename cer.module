@@ -23,15 +23,24 @@ function cer_entity_update(EntityInterface $entity) {
 }
 
 /**
+ * Implements hook_entity_delete().
+ */
+function cer_entity_delete(Drupal\Core\Entity\EntityInterface $entity) {
+  cer_sync_corresponding_references($entity, TRUE);
+}
+
+/**
  * Synchronize corresponding references for an entity.
  *
  * @param \Drupal\Core\Entity\EntityInterface $entity
  *   The entity to synchronize corresponding references for.
+ * @param bool $deleted
+ *   Whether the entity is deleted.
  *
  * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
  * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
  */
-function cer_sync_corresponding_references(EntityInterface $entity) {
+function cer_sync_corresponding_references(EntityInterface $entity, $deleted = FALSE) {
   if (!$entity instanceof FieldableEntityInterface) {
     return;
   }
@@ -42,6 +51,6 @@ function cer_sync_corresponding_references(EntityInterface $entity) {
   $references = $storage->loadValid($entity);
 
   foreach ($references as $reference) {
-    $reference->synchronizeCorrespondingFields($entity);
+    $reference->synchronizeCorrespondingFields($entity, $deleted);
   }
 }

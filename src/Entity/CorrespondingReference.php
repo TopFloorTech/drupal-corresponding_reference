@@ -230,7 +230,7 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
   /**
    * {@inheritdoc}
    */
-  public function synchronizeCorrespondingFields(FieldableEntityInterface $entity) {
+  public function synchronizeCorrespondingFields(FieldableEntityInterface $entity, $deleted = FALSE) {
     if (!$this->isValid($entity)) {
       return;
     }
@@ -240,7 +240,7 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
         continue;
       }
 
-      $differences = $this->calculateDifferences($entity, $fieldName);
+      $differences = $this->calculateDifferences($entity, $fieldName, $deleted);
       $correspondingField = $this->getCorrespondingField($fieldName);
 
       foreach ($differences as $operation => $entities) {
@@ -348,11 +348,13 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
    *   The current entity.
    * @param string $fieldName
    *   The field name to check.
+   * @param bool $deleted
+   *   Whether the entity is deleted.
    *
    * @return array
    *   The differences keyed by 'added' and 'removed'.
    */
-  protected function calculateDifferences(FieldableEntityInterface $entity, $fieldName) {
+  protected function calculateDifferences(FieldableEntityInterface $entity, $fieldName, $deleted = FALSE) {
     /** @var FieldableEntityInterface $original */
     $original = isset($entity->original) ? $entity->original : NULL;
 
@@ -367,8 +369,16 @@ class CorrespondingReference extends ConfigEntityBase implements CorrespondingRe
 
     $entityField = $entity->get($fieldName);
 
-    if (empty($original)) {
+    // If entity is deleted, remove references to it.
+    if ($deleted) {
       /** @var FieldItemInterface $fieldItem */
+      foreach ($entityField as $fieldItem) {
+        $differences[CorrespondingReferenceOperations::REMOVE][] = $fieldItem->entity;
+      }
+      return $differences;
+    }
+
+    if (empty($original)) {
       foreach ($entityField as $fieldItem) {
         $differences[CorrespondingReferenceOperations::ADD][] = $fieldItem->entity;
       }
